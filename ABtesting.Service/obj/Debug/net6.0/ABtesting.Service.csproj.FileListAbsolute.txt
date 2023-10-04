@@ -1,0 +1,14 @@
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ABtesting.Service.deps.json
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ABtesting.Service.runtimeconfig.json
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ABtesting.Service.dll
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ABtesting.Service.pdb
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.csproj.AssemblyReference.cache
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.AssemblyInfoInputs.cache
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.AssemblyInfo.cs
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.csproj.CoreCompileInputs.cache
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.dll
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.pdb
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.genruntimeconfig.cache
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ref/ABtesting.Service.dll
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ref/ABtesting.Service.dll

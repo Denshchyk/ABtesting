@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EfCoreDialogsState">
+    <option name="keyValueStorage">
+      <map>
+        <entry key="Common:4ad81b3e-30ce-683b-d7d0-3ba99bd89993:dbContext" value="ABtesting.Service.ApplicationContext" />
+        <entry key="Common:noBuild" value="true" />
+        <entry key="Common:outputFolder" value="Migrations" />
+      </map>
+    </option>
+  </component>
+</project>

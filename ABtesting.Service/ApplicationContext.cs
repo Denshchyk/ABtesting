@@ -7,6 +7,11 @@ public class ApplicationContext : DbContext
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<DevicesExperiment>()
+            .HasKey(t => new { t.ExperimentId, t.DeviceToken });
+    }
 
     public DbSet<Experiment> Experiments { get; set; }
     public DbSet<Device> Devices { get; set; }
