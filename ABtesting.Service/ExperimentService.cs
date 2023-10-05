@@ -20,4 +20,8 @@ public class ExperimentService
         var experiment = await _context.Experiments.FirstOrDefaultAsync(experiment => experiment.Key == key);
         return experiment;
     }
+    public List<Experiment> GetAllExperiments()
+    {
+        return _context.Experiments.ToList();
+    }
 }

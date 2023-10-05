@@ -20,4 +20,9 @@ public class DevicesService
         var device = await _context.Devices.FirstOrDefaultAsync(device => device.DeviceToken == deviceToken);
         return device;
     }
+
+    public List<Device> GetAllDevices()
+    {
+        return _context.Devices.ToList();
+    }
 }
