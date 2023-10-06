@@ -2,7 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ABtesting.Service;
 
-public class DevicesExperimentService
+public interface IDevicesExperimentService
+{
+    public Task AddDevicesExperimentAsync(Guid deviceToken, Guid experimentId);
+    Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments);
+    List<object> DistributionByKeyAndValue(List<Experiment> experiments);
+}
+
+public class DevicesExperimentService : IDevicesExperimentService
 {
     private ApplicationContext _context;
 
@@ -10,8 +17,14 @@ public class DevicesExperimentService
     {
         _context = context;
     }
+    public async Task AddDevicesExperimentAsync(Guid deviceToken, Guid experimentId)
+    {
+        var addDevicesExperiment = new DevicesExperiment {DeviceToken = deviceToken, ExperimentId = experimentId};
+        await _context.DevicesExperiments.AddAsync(addDevicesExperiment);
+        await _context.SaveChangesAsync();
+    }
     // количество девайсов, которые учавствуют в каждом из экспериментов
-    public static Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments)
+    public Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments)
     {
         var numberOfDevicesByKey = experiments
             .SelectMany(exp => exp.DevicesExperiments)
@@ -24,7 +37,7 @@ public class DevicesExperimentService
         return numberOfDevicesByKey;
     }
     
-    public static List<object> DistributionByKeyAndValue(List<Experiment> experiments)
+    public List<object> DistributionByKeyAndValue(List<Experiment> experiments)
     {
         var distributionResults = experiments
             .SelectMany(exp => exp.DevicesExperiments.Select(de => new

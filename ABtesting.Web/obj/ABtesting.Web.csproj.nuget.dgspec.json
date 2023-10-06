@@ -74,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/6.0.110/libexec/sdk/6.0.110/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/pavlodenshchyk/.dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -159,7 +159,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/Cellar/dotnet/6.0.110/libexec/sdk/6.0.110/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/Users/pavlodenshchyk/.dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
         }
       }
     }

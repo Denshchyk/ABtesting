@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IDevicesService, DevicesService>();
+builder.Services.AddScoped<IExperimentService, ExperimentService>();
+builder.Services.AddScoped<IDevicesExperimentService, DevicesExperimentService>();
 builder.Services.AddDbContextPool<ApplicationContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Applications")));
 

@@ -2,7 +2,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ABtesting.Service;
 
-public class DevicesService
+public interface IDevicesService
+{
+    Task AddDeviceAsync(Device addDevice);
+    Task<Device?> GetByDeviceTokenAsync(Guid deviceToken);
+    List<Device> GetAllDevices();
+}
+
+public class DevicesService : IDevicesService
 {
     private ApplicationContext _context;
 

@@ -11,4 +11,4 @@
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.pdb
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ABtesting.Service.genruntimeconfig.cache
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/ref/ABtesting.Service.dll
-/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/bin/Debug/net6.0/ref/ABtesting.Service.dll
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Service/obj/Debug/net6.0/refint/ABtesting.Service.dll

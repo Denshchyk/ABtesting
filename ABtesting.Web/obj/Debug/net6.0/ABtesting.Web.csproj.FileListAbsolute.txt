@@ -40,7 +40,6 @@
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/obj/Debug/net6.0/ABtesting.Web.pdb
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/obj/Debug/net6.0/ABtesting.Web.genruntimeconfig.cache
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/obj/Debug/net6.0/ref/ABtesting.Web.dll
-/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/ref/ABtesting.Web.dll
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/Humanizer.dll
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/Microsoft.Extensions.DependencyModel.dll
@@ -49,3 +48,4 @@
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/System.Text.Encodings.Web.dll
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/System.Text.Json.dll
 /Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/bin/Debug/net6.0/runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll
+/Users/pavlodenshchyk/RiderProjects/ABtesting/ABtesting.Web/obj/Debug/net6.0/refint/ABtesting.Web.dll
