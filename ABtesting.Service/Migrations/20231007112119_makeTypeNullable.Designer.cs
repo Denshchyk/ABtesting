@@ -3,6 +3,7 @@ using System;
 using ABtesting.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ABtesting.Service.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231007112119_makeTypeNullable")]
+    partial class makeTypeNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +47,12 @@ namespace ABtesting.Service.Migrations
                     b.Property<Guid>("DeviceToken")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("DeviceToken1")
+                        .HasColumnType("uuid");
+
                     b.HasKey("ExperimentId", "DeviceToken");
 
-                    b.HasIndex("DeviceToken");
+                    b.HasIndex("DeviceToken1");
 
                     b.ToTable("DevicesExperiments");
                 });
@@ -75,21 +81,15 @@ namespace ABtesting.Service.Migrations
 
             modelBuilder.Entity("ABtesting.Service.DevicesExperiment", b =>
                 {
-                    b.HasOne("ABtesting.Service.Device", "Device")
+                    b.HasOne("ABtesting.Service.Device", null)
                         .WithMany("DevicesExperiments")
-                        .HasForeignKey("DeviceToken")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DeviceToken1");
 
-                    b.HasOne("ABtesting.Service.Experiment", "Experiment")
+                    b.HasOne("ABtesting.Service.Experiment", null)
                         .WithMany("DevicesExperiments")
                         .HasForeignKey("ExperimentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Device");
-
-                    b.Navigation("Experiment");
                 });
 
             modelBuilder.Entity("ABtesting.Service.Device", b =>

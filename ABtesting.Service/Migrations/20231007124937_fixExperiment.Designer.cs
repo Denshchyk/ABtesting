@@ -3,6 +3,7 @@ using System;
 using ABtesting.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ABtesting.Service.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231007124937_fixExperiment")]
+    partial class fixExperiment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +47,12 @@ namespace ABtesting.Service.Migrations
                     b.Property<Guid>("DeviceToken")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("DeviceToken1")
+                        .HasColumnType("uuid");
+
                     b.HasKey("ExperimentId", "DeviceToken");
 
-                    b.HasIndex("DeviceToken");
+                    b.HasIndex("DeviceToken1");
 
                     b.ToTable("DevicesExperiments");
                 });
@@ -77,7 +83,7 @@ namespace ABtesting.Service.Migrations
                 {
                     b.HasOne("ABtesting.Service.Device", "Device")
                         .WithMany("DevicesExperiments")
-                        .HasForeignKey("DeviceToken")
+                        .HasForeignKey("DeviceToken1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

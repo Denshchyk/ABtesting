@@ -4,7 +4,7 @@ namespace ABtesting.Service;
 
 public interface IDevicesExperimentService
 {
-    public Task AddDevicesExperimentAsync(Guid deviceToken, Guid experimentId);
+    public Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key);
     Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments);
     List<object> DistributionByKeyAndValue(List<Experiment> experiments);
 }
@@ -12,16 +12,45 @@ public interface IDevicesExperimentService
 public class DevicesExperimentService : IDevicesExperimentService
 {
     private ApplicationContext _context;
+    private IRandomProvider _random;
 
-    public DevicesExperimentService(ApplicationContext context)
+    public DevicesExperimentService(ApplicationContext context, IRandomProvider random)
     {
         _context = context;
+        _random = random;
     }
-    public async Task AddDevicesExperimentAsync(Guid deviceToken, Guid experimentId)
+    public async Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key)
     {
-        var addDevicesExperiment = new DevicesExperiment {DeviceToken = deviceToken, ExperimentId = experimentId};
+        var randomExperiment = GetRandomExperiment(key);
+        var addDevicesExperiment = new DevicesExperiment {DeviceToken = deviceToken, ExperimentId = randomExperiment.Id};
         await _context.DevicesExperiments.AddAsync(addDevicesExperiment);
         await _context.SaveChangesAsync();
+        return new ExperimentModel(randomExperiment.Id, randomExperiment.Key, randomExperiment.Value, randomExperiment.ChanceInPercents);
+    }
+    public Experiment GetRandomExperiment(string key)
+    {
+        var experiments = _context.Experiments
+            .Where(e => e.Key == key)
+            .ToList();
+
+        if (experiments.Sum(e => e.ChanceInPercents) != 100m)
+        {
+            throw new InvalidOperationException("Total chance for experiments with the given name is not 100%.");
+        }
+
+        var cumulativeChance = 0m;
+        var roll = (decimal)_random.NextDouble() * 100;
+
+        foreach (var experiment in experiments)
+        {
+            cumulativeChance += experiment.ChanceInPercents;
+            if (roll < cumulativeChance)
+            {
+                return experiment;
+            }
+        }
+        
+        throw new InvalidOperationException("No experiment selected. This should not happen.");
     }
     // количество девайсов, которые учавствуют в каждом из экспериментов
     public Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments)
