@@ -4,10 +4,16 @@ namespace ABtesting.Service;
 
 public interface IDevicesExperimentService
 {
-    public Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="deviceToken"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key);
     Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments);
-    List<object> DistributionByKeyAndValue(List<Experiment> experiments);
-    public IEnumerable<DevicesExperiment> GetAllExperimentsForDevice(Guid deviceToken);
+    List<object> DistributionByKeyAndValue(List<Experiment> experiments); 
+    Task<ExperimentModel?> GetAllExperimentsForDeviceAsync(Guid deviceToken, string key);
 }
 
 public class DevicesExperimentService : IDevicesExperimentService
@@ -29,9 +35,16 @@ public class DevicesExperimentService : IDevicesExperimentService
         return new ExperimentModel(randomExperiment.Id, randomExperiment.Key, randomExperiment.Value, randomExperiment.ChanceInPercents);
     }
 
-    public IEnumerable<DevicesExperiment> GetAllExperimentsForDevice(Guid deviceToken)
+    public async Task<ExperimentModel?> GetAllExperimentsForDeviceAsync(Guid deviceToken, string key)
     {
-        return _context.DevicesExperiments.Where(de => de.DeviceToken == deviceToken);
+        var devicesExperiments = _context.DevicesExperiments.Include(x => x.Experiment)
+            .Where(de => de.DeviceToken == deviceToken);
+        if (await devicesExperiments.AnyAsync())
+        {
+            var experimentWithKey = devicesExperiments.FirstOrDefault(x=> x.Experiment.Key == key)!.Experiment;
+            return new ExperimentModel(experimentWithKey.Id, experimentWithKey.Key, experimentWithKey.Value, experimentWithKey.ChanceInPercents);
+        }
+        return null;
     }
     
     public Experiment GetRandomExperiment(string key)

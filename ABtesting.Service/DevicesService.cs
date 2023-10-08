@@ -6,7 +6,7 @@ public interface IDevicesService
 {
     Task AddDeviceAsync(Device addDevice);
     Task<Device?> GetByDeviceTokenAsync(Guid deviceToken);
-    List<Device> GetAllDevices();
+    Task<IEnumerable<DeviceModel>> GetAllDevices();
 }
 
 public class DevicesService : IDevicesService
@@ -28,8 +28,9 @@ public class DevicesService : IDevicesService
         return device;
     }
 
-    public List<Device> GetAllDevices()
+    public async Task<IEnumerable<DeviceModel>> GetAllDevices()
     {
-        return _context.Devices.Include(x => x.DevicesExperiments).ToList();
+        var devices = _context.Devices.Include(x => x.DevicesExperiments).ToList();
+        return devices.Select(x => new DeviceModel(x.DeviceToken, x.Type));
     }
 }

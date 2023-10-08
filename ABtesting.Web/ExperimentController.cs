@@ -21,9 +21,10 @@ public class ExperimentController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Experiment> Get()
+    public async Task<ActionResult<IEnumerable<ExperimentModel>>> Get()
     {
-        return _experimentService.GetAllExperiments();
+        var experimentModels = await _experimentService.GetAllExperiments();
+        return Ok(experimentModels);
     }
 
     [HttpGet("{key}")]
@@ -41,11 +42,11 @@ public class ExperimentController : ControllerBase
             return Created(nameof(GetExperiment), randomExperiment);
         }
 
-        var devicesExperiment =
-            device.DevicesExperiments.FirstOrDefault(de => de.DeviceToken == device.DeviceToken && de.Experiment.Key == key);
-        if (devicesExperiment is not null)
+        var devicesExperiments = await _devicesExperimentService.GetAllExperimentsForDeviceAsync(deviceToken, key);
+        
+        if (devicesExperiments is not null)
         {
-            var experiments = _devicesExperimentService.GetAllExperimentsForDevice(deviceToken);
+            return devicesExperiments;
         }
         return NoContent();
     }

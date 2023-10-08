@@ -6,7 +6,7 @@ public interface IExperimentService
 {
     Task AddExperimentAsync(Experiment addExperiment);
     Task<Experiment?> GetByKeyAsync(string key);
-    List<Experiment> GetAllExperiments();
+    Task<IEnumerable<ExperimentModel>> GetAllExperiments();
 }
 
 public class ExperimentService : IExperimentService
@@ -40,8 +40,9 @@ public class ExperimentService : IExperimentService
         var experiment = await _context.Experiments.FirstOrDefaultAsync(experiment => experiment.Key == key);
         return experiment;
     }
-    public List<Experiment> GetAllExperiments()
+    public async Task<IEnumerable<ExperimentModel>> GetAllExperiments()
     {
-        return _context.Experiments.Include(x => x.DevicesExperiments).ToList();
+        var experiments = await _context.Experiments.Include(x => x.DevicesExperiments).ToListAsync();
+        return experiments.Select(x => new ExperimentModel(x.Id, x.Key, x.Value, x.ChanceInPercents));
     }
 }

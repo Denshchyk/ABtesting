@@ -21,8 +21,9 @@ public class DeviceController : ControllerBase
     }
     
     [HttpGet]
-    public IEnumerable<Device> GetAllDevices()
+    public async Task<ActionResult<IEnumerable<DeviceModel>>> GetAllDevices()
     {
-        return _devicesService.GetAllDevices();
+        var deviceModels = await _devicesService.GetAllDevices();
+        return Ok(deviceModels);
     }
 }
