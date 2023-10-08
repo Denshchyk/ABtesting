@@ -19,14 +19,7 @@ public class ExperimentController : ControllerBase
         _devicesService = devicesService;
         _devicesExperimentService = devicesExperimentService;
     }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ExperimentModel>>> Get()
-    {
-        var experimentModels = await _experimentService.GetAllExperiments();
-        return Ok(experimentModels);
-    }
-
+    
     [HttpGet("{key}")]
     // если девайса не существует, создает девайс (рандомный токен и тип "device.Type") и добавляет ему девайсесЕксперимент с существующим экспериментом
     public async Task<ActionResult<ExperimentModel>> GetExperiment(string key, [FromQuery]Guid deviceToken)

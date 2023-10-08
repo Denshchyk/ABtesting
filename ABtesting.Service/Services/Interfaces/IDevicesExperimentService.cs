@@ -9,7 +9,5 @@ public interface IDevicesExperimentService
     /// <param name="key"></param>
     /// <returns></returns>
     Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key);
-    Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments);
-    List<object> DistributionByKeyAndValue(List<Experiment> experiments); 
     Task<ExperimentModel?> GetAllExperimentsForDeviceAsync(Guid deviceToken, string key);
 }

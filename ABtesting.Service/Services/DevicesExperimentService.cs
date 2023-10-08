@@ -33,6 +33,12 @@ public class DevicesExperimentService : IDevicesExperimentService
         return null;
     }
     
+    /// <summary>
+    /// Retrieves a random experiment based on its ChanceInPercents property.
+    /// </summary>
+    /// <param name="Key">The name of the experiment group to select from.</param>
+    /// <returns>A randomly selected experiment based on the weighted ChanceInPercents.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the total chance for experiments with the given name is not 100% or if no experiment is selected.</exception>
     public Experiment GetRandomExperiment(string key)
     {
         var experiments = _context.Experiments
@@ -57,39 +63,5 @@ public class DevicesExperimentService : IDevicesExperimentService
         }
         
         throw new InvalidOperationException("No experiment selected. This should not happen.");
-    }
-    // количество девайсов, которые учавствуют в каждом из экспериментов
-    public Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments)
-    {
-        var numberOfDevicesByKey = experiments
-            .SelectMany(exp => exp.DevicesExperiments)
-            .GroupBy(de => de.ExperimentId)
-            .ToDictionary(
-                group => experiments.First(exp => exp.Id == group.Key).Key,
-                group => group.Count()
-            );
-        
-        return numberOfDevicesByKey;
-    }
-    
-    public List<object> DistributionByKeyAndValue(List<Experiment> experiments)
-    {
-        var distributionResults = experiments
-            .SelectMany(exp => exp.DevicesExperiments.Select(de => new
-            {
-                exp.Key,
-                exp.Value,
-                DeviceToken = de.DeviceToken
-            }))
-            .GroupBy(x => new { x.Key, x.Value })
-            .Select(group => new
-            {
-                Key = group.Key.Key,
-                Value = group.Key.Value,
-                Count = group.Count()
-            })
-            .ToList();
-
-        return distributionResults.Cast<object>().ToList();
     }
 }

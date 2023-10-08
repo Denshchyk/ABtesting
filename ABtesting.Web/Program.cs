@@ -9,6 +9,7 @@ builder.Services.AddScoped<IDevicesService, DevicesService>();
 builder.Services.AddScoped<IExperimentService, ExperimentService>();
 builder.Services.AddScoped<IDevicesExperimentService, DevicesExperimentService>();
 builder.Services.AddTransient<IRandomProvider, RandomProvider>();
+builder.Services.AddScoped<IStatisticService, StatisticService>();
 builder.Services.AddDbContextPool<ApplicationContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("Applications")));
 
