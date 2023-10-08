@@ -2,8 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ABtesting.Service;
 
-public record DeviceModel(Guid DeviceToken, string? Type);
-    
 public class Device
 {
     [Key]
