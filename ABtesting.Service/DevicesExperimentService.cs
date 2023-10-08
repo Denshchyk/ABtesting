@@ -7,6 +7,7 @@ public interface IDevicesExperimentService
     public Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key);
     Dictionary<string, int> NumberOfDevicesByKey(List<Experiment> experiments);
     List<object> DistributionByKeyAndValue(List<Experiment> experiments);
+    public IEnumerable<DevicesExperiment> GetAllExperimentsForDevice(Guid deviceToken);
 }
 
 public class DevicesExperimentService : IDevicesExperimentService
@@ -27,6 +28,12 @@ public class DevicesExperimentService : IDevicesExperimentService
         await _context.SaveChangesAsync();
         return new ExperimentModel(randomExperiment.Id, randomExperiment.Key, randomExperiment.Value, randomExperiment.ChanceInPercents);
     }
+
+    public IEnumerable<DevicesExperiment> GetAllExperimentsForDevice(Guid deviceToken)
+    {
+        return _context.DevicesExperiments.Where(de => de.DeviceToken == deviceToken);
+    }
+    
     public Experiment GetRandomExperiment(string key)
     {
         var experiments = _context.Experiments

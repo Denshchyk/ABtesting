@@ -7,5 +7,3 @@ o
 ?ABtesting.Service/Migrations/20231004191253_initial.Designer.cs,7/9/7988a88a521b56295e6cd7d17c4d0324e9d79b0a
 R
 "ABtesting.Web/ABtesting.Web.csproj,f/9/f9bc4bb05a6e27567dd0374bab59ce24d42f3491
-S
-#ABtesting.Service/DevicesService.cs,6/a/6a34fbc7d650f7863f8ec29576a7f80b140ad769

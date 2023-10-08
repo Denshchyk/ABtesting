@@ -30,6 +30,6 @@ public class DevicesService : IDevicesService
 
     public List<Device> GetAllDevices()
     {
-        return _context.Devices.ToList();
+        return _context.Devices.Include(x => x.DevicesExperiments).ToList();
     }
 }

@@ -7,5 +7,3 @@ R
 "ABtesting.Web/ABtesting.Web.csproj,f/9/f9bc4bb05a6e27567dd0374bab59ce24d42f3491
 f
 6ABtesting.Service/Migrations/20231004191253_initial.cs,e/0/e0ddb4f11b1becbf9ee30d4d6f8a30e76abb474f
-S
-#ABtesting.Service/DevicesService.cs,6/a/6a34fbc7d650f7863f8ec29576a7f80b140ad769

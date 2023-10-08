@@ -45,7 +45,7 @@ public class ExperimentController : ControllerBase
             device.DevicesExperiments.FirstOrDefault(de => de.DeviceToken == device.DeviceToken && de.Experiment.Key == key);
         if (devicesExperiment is not null)
         {
-            return Ok("i am here");
+            var experiments = _devicesExperimentService.GetAllExperimentsForDevice(deviceToken);
         }
         return NoContent();
     }
@@ -59,18 +59,5 @@ public class ExperimentController : ControllerBase
         }
         var addExperiment = new Experiment { Key = key, Value = value, ChanceInPercents = chanceInPrecents};
         await _experimentService.AddExperimentAsync(addExperiment);
-    }
-    //TODO: move to DeviceController
-    [HttpPost("{type}")]
-    public async Task AddDevice(string type)
-    {
-        var addDevice = new Device { Type = type};
-        await _devicesService.AddDeviceAsync(addDevice);
-    }
-    //TODO: move to DeviceController
-    [HttpGet]
-    public IEnumerable<Device> GetAllDevices()
-    {
-        return _devicesService.GetAllDevices();
     }
 }
