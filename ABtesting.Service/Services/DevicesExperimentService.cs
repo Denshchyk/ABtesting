@@ -12,6 +12,12 @@ public class DevicesExperimentService : IDevicesExperimentService
         _context = context;
         _random = random;
     }
+    /// <summary>
+    /// Adds a random experiment to a device asynchronously.
+    /// </summary>
+    /// <param name="deviceToken">The unique identifier of the device.</param>
+    /// <param name="key">The key associated with the experiment.</param>
+    /// <returns>An <see cref="ExperimentModel"/> representing the added experiment.</returns>
     public async Task<ExperimentModel> AddRandomExperimentToDeviceAsync(Guid deviceToken, string key)
     {
         var randomExperiment = GetRandomExperiment(key);
@@ -20,7 +26,16 @@ public class DevicesExperimentService : IDevicesExperimentService
         await _context.SaveChangesAsync();
         return new ExperimentModel(randomExperiment.Id, randomExperiment.Key, randomExperiment.Value, randomExperiment.ChanceInPercents);
     }
-
+    
+    /// <summary>
+    /// Retrieves all experiments associated with a specific device and a given key asynchronously.
+    /// </summary>
+    /// <param name="deviceToken">The unique identifier of the device.</param>
+    /// <param name="key">The key associated with the experiments to retrieve.</param>
+    /// <returns>
+    /// An <see cref="ExperimentModel"/> representing the experiment with the specified key if found;
+    /// otherwise, returns <c>null</c>.
+    /// </returns>
     public async Task<ExperimentModel?> GetAllExperimentsForDeviceAsync(Guid deviceToken, string key)
     {
         var devicesExperiments = _context.DevicesExperiments.Include(x => x.Experiment)

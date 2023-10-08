@@ -15,16 +15,25 @@ public class StatisticController : ControllerBase
         _statisticService = statisticService;
     }
     
-    [HttpGet("devices")]
+    [HttpGet("numberOfDevices")]
     public ActionResult<int> GetNumberOfDevices()
     {
         var numberOfDevices = _statisticService.GetAllDevices();
         return Ok(numberOfDevices);
     }
-    [HttpGet]
+    
+    [HttpGet("experiments")]
     public async Task<ActionResult<IEnumerable<ExperimentModel>>> GetExperiments()
     {
         var experimentModels = await _statisticService.GetAllExperiments();
         return Ok(experimentModels);
+    }
+    
+    [HttpGet("distribution")]
+    public async Task<ActionResult<List<object>>> DistributionByKeyAndValue()
+    {
+        var experiments = _statisticService.GetAllExperimentsToList();
+        var distribution =  _statisticService.DistributionByKeyAndValue(experiments);
+        return Ok(distribution);
     }
 }
