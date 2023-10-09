@@ -2,8 +2,7 @@ namespace ABtesting.Service;
 
 public interface IStatisticService
 {
-    List<object> DistributionByKeyAndValue(List<Experiment> experiments);
+    Task<List<DistributionModel>> DistributionByKeyAndValueAsync();
     int GetAllDevices();
     Task<IEnumerable<ExperimentModel>> GetAllExperiments();
-    List<Experiment> GetAllExperimentsToList();
 }

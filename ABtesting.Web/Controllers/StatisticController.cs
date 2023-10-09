@@ -30,10 +30,9 @@ public class StatisticController : ControllerBase
     }
     
     [HttpGet("distribution")]
-    public async Task<ActionResult<List<object>>> DistributionByKeyAndValue()
+    public async Task<ActionResult<List<DistributionModel>>> DistributionByKeyAndValue()
     {
-        var experiments = _statisticService.GetAllExperimentsToList();
-        var distribution =  _statisticService.DistributionByKeyAndValue(experiments);
+        var distribution = await _statisticService.DistributionByKeyAndValueAsync();
         return Ok(distribution);
     }
 }

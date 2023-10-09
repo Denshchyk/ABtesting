@@ -19,25 +19,13 @@ public class StatisticService : IStatisticService
     /// A list of objects representing the distribution of experiments by key and value.
     /// Each object contains properties Key, Value, and Count.
     /// </returns>
-    public List<object> DistributionByKeyAndValue(List<Experiment> experiments)
+    public async Task<List<DistributionModel>> DistributionByKeyAndValueAsync()
     {
-        var distributionResults = experiments
-            .SelectMany(exp => exp.DevicesExperiments.Select(de => new
-            {
-                exp.Key,
-                exp.Value,
-                DeviceToken = de.DeviceToken
-            }))
-            .GroupBy(x => new { x.Key, x.Value })
-            .Select(group => new
-            {
-                Key = group.Key.Key,
-                Value = group.Key.Value,
-                Count = group.Count()
-            })
-            .ToList();
+        var distributionResults = _context.DevicesExperiments
+            .GroupBy(x => new { x.Experiment.Key, x.Experiment.Value })
+            .Select(group => new DistributionModel(group.Key.Key, group.Key.Value, group.Count()));
 
-        return distributionResults.Cast<object>().ToList();
+        return await distributionResults.ToListAsync();
     }
     
     /// <summary>
