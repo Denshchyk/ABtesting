@@ -21,7 +21,6 @@ public class ExperimentController : ControllerBase
     }
     
     [HttpGet("{key}")]
-    // если девайса не существует, создает девайс (рандомный токен и тип "device.Type") и добавляет ему девайсесЕксперимент с существующим экспериментом
     public async Task<ActionResult<ExperimentModel>> GetExperiment(string key, [FromQuery]Guid deviceToken)
     {
         var device = await _devicesService.GetByDeviceTokenAsync(deviceToken);

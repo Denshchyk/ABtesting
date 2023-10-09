@@ -14,7 +14,6 @@ public class StatisticService : IStatisticService
     /// <summary>
     /// Calculates and returns the distribution of experiments by their key and value.
     /// </summary>
-    /// <param name="experiments">The list of experiments to calculate the distribution for.</param>
     /// <returns>
     /// A list of objects representing the distribution of experiments by key and value.
     /// Each object contains properties Key, Value, and Count.
